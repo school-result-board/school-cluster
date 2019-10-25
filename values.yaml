@@ -2,11 +2,5 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
-favorite:
-  food: pizza
-  drink: coffee
-pizzaToppings:
-  - mushrooms
-  - cheese
-  - peppers
-  - onions
+replicaCount: 1
+imageRegistry: zaidhoona-docker-docker.bintray.io

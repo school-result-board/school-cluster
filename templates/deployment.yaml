@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-service.app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+        app: student-service.app
+  template:
+    metadata:
+      labels:
+        app: student-service.app
+    spec:
+      containers:
+        - name: student-service-app
+          image: {{ .Values.imageRegistry }}/result-board/student-service:latest
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: score-service.app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+        app: score-service.app
+  template:
+    metadata:
+      labels:
+        app: score-service.app
+    spec:
+      containers:
+        - name: score-service-app
+          image: {{ .Values.imageRegistry }}/result-board/score-service:latest
