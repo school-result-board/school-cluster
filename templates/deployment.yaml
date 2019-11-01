@@ -1,35 +1,71 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: student-service.app
+  name: discovery-app
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-        app: student-service.app
+        app: discovery-app
   template:
     metadata:
       labels:
-        app: student-service.app
+        app: discovery-app
     spec:
       containers:
-        - name: student-service-app
+        - name: discovery-app
+          image: {{ .Values.imageRegistry }}/result-board/discovery-service:latest
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: student-app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+        app: student-app
+  template:
+    metadata:
+      labels:
+        app: student-app
+    spec:
+      containers:
+        - name: student-app
           image: {{ .Values.imageRegistry }}/result-board/student-service:latest
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: score-service.app
+  name: score-app
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-        app: score-service.app
+        app: score-app
   template:
     metadata:
       labels:
-        app: score-service.app
+        app: score-app
     spec:
       containers:
-        - name: score-service-app
+        - name: score-app
           image: {{ .Values.imageRegistry }}/result-board/score-service:latest
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: result-app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+        app: result-app
+  template:
+    metadata:
+      labels:
+        app: result-app
+    spec:
+      containers:
+        - name: result-app
+          image: {{ .Values.imageRegistry }}/result-board/result-service:latest

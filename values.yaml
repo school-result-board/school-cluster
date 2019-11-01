@@ -4,3 +4,7 @@
 
 replicaCount: 1
 imageRegistry: zaidhoona-docker-docker.bintray.io
+service:
+    type: ClusterIP
+    externalPort: 80
+    internalPort: 80
